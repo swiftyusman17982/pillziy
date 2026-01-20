@@ -9,7 +9,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/#mission", label: "Mission" },
-    { href: "/#contact", label: "Contact Us" },
+    { href: "/#contact-us", label: "Contact Us" },
   ];
 
   return (
@@ -35,20 +35,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {link.label}
               </a>
             ))}
-            <Link href="/investor-deck">
+            <Link href="/#contact-us">
               <Button 
-                variant={location === "/investor-deck" ? "secondary" : "default"}
+                variant="default"
                 className="font-semibold shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all"
               >
-                Investor Deck
+                Request Demo
               </Button>
             </Link>
           </nav>
 
           {/* Mobile Menu Placeholder - kept simple for this MVP */}
           <div className="md:hidden">
-            <Link href="/investor-deck">
-              <Button size="sm">Investors</Button>
+            <Link href="/#contact-us">
+              <Button size="sm">Demo</Button>
             </Link>
           </div>
         </div>
@@ -64,7 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </motion.div>
       </main>
 
-      <footer className="border-t bg-slate-50 py-12" id="contact">
+      <footer className="border-t bg-slate-50 py-12">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -80,8 +80,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Company</h4>
             <ul className="space-y-2 text-sm text-slate-600">
               <li><a href="/#mission" className="hover:text-primary">Mission</a></li>
-              <li><a href="/#team" className="hover:text-primary">Team</a></li>
-              <li><a href="/investor-deck" className="hover:text-primary">Investors</a></li>
+              <li><a href="/#contact-us" className="hover:text-primary">Contact Us</a></li>
             </ul>
           </div>
 
