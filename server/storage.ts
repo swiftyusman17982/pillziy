@@ -1,38 +1,55 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import {
+  earlyAccessSignups,
+  demoRequests,
+  investorRequests,
+  type InsertEarlyAccess,
+  type EarlyAccessSignup,
+  type InsertDemoRequest,
+  type DemoRequest,
+  type InsertInvestorRequest,
+  type InvestorRequest,
+} from "@shared/schema";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  // Early Access
+  createEarlyAccessSignup(signup: InsertEarlyAccess): Promise<EarlyAccessSignup>;
+  
+  // Demo Request
+  createDemoRequest(request: InsertDemoRequest): Promise<DemoRequest>;
+
+  // Investor Request
+  createInvestorRequest(request: InsertInvestorRequest): Promise<InvestorRequest>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  // Early Access
+  async createEarlyAccessSignup(signup: InsertEarlyAccess): Promise<EarlyAccessSignup> {
+    const [newSignup] = await db
+      .insert(earlyAccessSignups)
+      .values(signup)
+      .returning();
+    return newSignup;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  // Demo Request
+  async createDemoRequest(request: InsertDemoRequest): Promise<DemoRequest> {
+    const [newRequest] = await db
+      .insert(demoRequests)
+      .values(request)
+      .returning();
+    return newRequest;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  // Investor Request
+  async createInvestorRequest(request: InsertInvestorRequest): Promise<InvestorRequest> {
+    const [newRequest] = await db
+      .insert(investorRequests)
+      .values(request)
+      .returning();
+    return newRequest;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
