@@ -24,38 +24,32 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-32 lg:pb-32">
-      <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-red-50 rounded-full blur-3xl opacity-50 translate-x-1/4 -translate-y-1/4" />
-      <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-blue-50 rounded-full blur-3xl opacity-50 -translate-x-1/4 translate-y-1/4" />
+    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-32 lg:pb-48 bg-[#F0F9FF]">
+      {/* Background Wave Aesthetic from Image */}
+      <div className="absolute top-0 right-0 -z-10 w-full h-full overflow-hidden">
+        <div className="absolute top-0 right-0 w-[60%] h-[120%] bg-white rounded-l-[20rem] translate-x-1/4 -translate-y-1/4" />
+      </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center rounded-full border border-red-100 bg-red-50 px-3 py-1 text-sm font-medium text-red-600 mb-6">
-              <span className="flex h-2 w-2 rounded-full bg-red-600 mr-2 animate-pulse"></span>
-              Join the revolution
-            </div>
-            
-            <h1 className="text-5xl lg:text-7xl font-display font-bold tracking-tight text-slate-900 leading-[1.1] mb-6">
+            <h1 className="text-5xl lg:text-7xl font-display font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-8">
               Save time.<br />
-              <span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-red-600">
-                Healthcare online.
-              </span>
+              Healthcare online
             </h1>
             
-            <p className="text-xl text-slate-600 mb-10 leading-relaxed">
-              We're building the future of patient adherence and communication. 
-              Talking Pills helps organizations scale care with intelligent, personalized video interactions.
+            <p className="text-lg text-[#64748B] mb-12 max-w-lg leading-relaxed">
+              Now you do not need to download thousands of applications when there is one
             </p>
 
-            <div className="bg-white p-2 rounded-2xl shadow-lg border border-slate-100 max-w-md">
+            <div className="bg-white p-1.5 rounded-full shadow-xl shadow-blue-100/50 border border-slate-100 max-w-md flex items-center">
               {isJoined ? (
-                <div className="h-12 flex items-center px-4 text-green-600 font-medium">
+                <div className="h-14 flex items-center px-6 text-green-600 font-medium">
                   <CheckCircle2 className="w-5 h-5 mr-2" /> Thanks for joining!
                 </div>
               ) : (
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full">
                     <FormField
                       control={form.control}
                       name="email"
@@ -66,7 +60,7 @@ function HeroSection() {
                               type="email"
                               required
                               placeholder="Enter your email" 
-                              className="border-0 shadow-none focus-visible:ring-0 pl-4 h-12 bg-transparent text-base"
+                              className="border-0 shadow-none focus-visible:ring-0 pl-6 h-14 bg-transparent text-base rounded-full"
                               {...field} 
                             />
                           </FormControl>
@@ -76,9 +70,9 @@ function HeroSection() {
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="h-12 px-8 rounded-xl font-semibold shadow-md shadow-red-200 hover:shadow-lg transition-all"
+                      className="h-14 px-10 rounded-full font-bold bg-[#3B82F6] hover:bg-[#2563EB] text-white transition-all text-lg"
                     >
-                      Join Early Access
+                      Get Started
                     </Button>
                   </form>
                 </Form>
@@ -90,19 +84,66 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative"
+            className="relative flex justify-center"
           >
-            <div className="aspect-video rounded-3xl overflow-hidden bg-slate-900 shadow-2xl shadow-slate-200 border-8 border-white relative group cursor-pointer">
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 text-white">
-                <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <Play className="w-8 h-8 text-white fill-white ml-1" />
+            {/* App UI Simulation from Image */}
+            <div className="relative w-full max-w-[450px]">
+              <div className="aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-blue-200/50 border-[12px] border-white relative group">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F8FAFC]">
+                   {/* Doctor Card UI */}
+                   <div className="relative w-full h-full flex flex-col">
+                      <div className="flex-1 bg-slate-100 flex items-center justify-center">
+                        <User2 className="w-24 h-24 text-slate-300" />
+                      </div>
+                      <div className="p-6 bg-white space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-xs font-medium text-slate-400 uppercase">Dentist</p>
+                            <h4 className="text-lg font-bold">Dr. Hrubenger</h4>
+                          </div>
+                          <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center shadow-lg shadow-red-200">
+                            <Phone className="w-5 h-5 text-white fill-white" />
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                           <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
+                             <User2 className="w-5 h-5 text-white" />
+                           </div>
+                           <div className="flex-1 h-10 rounded-xl bg-blue-500 flex items-center justify-center">
+                             <Mail className="w-5 h-5 text-white" />
+                           </div>
+                        </div>
+                      </div>
+                   </div>
                 </div>
-                <h3 className="font-display font-semibold text-xl">Talking Pills Demo</h3>
-                <p className="text-slate-400 mt-2">Watch how it works</p>
+              </div>
+
+              {/* Floatings cards */}
+              <div className="absolute -left-12 bottom-20 bg-white p-4 rounded-3xl shadow-xl border border-slate-50 w-32">
+                <p className="text-xs text-slate-400 mb-1">Online queue</p>
+                <p className="text-2xl font-bold text-slate-900">48</p>
+                <div className="mt-2 h-8 w-full bg-blue-50 rounded-lg overflow-hidden flex items-end">
+                   <div className="h-1/2 w-full bg-blue-400" />
+                </div>
               </div>
             </div>
-            <div className="absolute -z-10 -bottom-10 -left-10 w-full h-full opacity-30 bg-[radial-gradient(#EF4444_1px,transparent_1px)] [background-size:20px_20px]" />
           </motion.div>
+        </div>
+
+        {/* Stats Section from Image */}
+        <div className="grid md:grid-cols-3 gap-12 mt-24 max-w-4xl">
+           <div className="space-y-1">
+             <h3 className="text-4xl font-bold text-[#1E293B]">4.9*</h3>
+             <p className="text-sm text-[#64748B]">Average platform specialists rating.</p>
+           </div>
+           <div className="space-y-1">
+             <h3 className="text-4xl font-bold text-[#1E293B]">HHS</h3>
+             <p className="text-sm text-[#64748B]">All government licences and certificates.</p>
+           </div>
+           <div className="space-y-1">
+             <h3 className="text-4xl font-bold text-[#1E293B]">2M+</h3>
+             <p className="text-sm text-[#64748B]">Online-consultations number last year.</p>
+           </div>
         </div>
       </div>
     </section>

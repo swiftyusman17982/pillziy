@@ -35,12 +35,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {link.label}
               </a>
             ))}
+            <Button variant="ghost" className="text-blue-500 font-bold hover:text-blue-600">
+              Login
+            </Button>
             <Link href="/#contact-us">
               <Button 
-                variant="default"
-                className="font-semibold shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all"
+                className="font-bold rounded-full bg-[#3B82F6] hover:bg-[#2563EB] text-white px-8"
               >
-                Request Demo
+                Get App
               </Button>
             </Link>
           </nav>
