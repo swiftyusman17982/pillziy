@@ -1,35 +1,30 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { useEarlyAccess, useDemoRequest } from "@/hooks/use-api";
-import { insertEarlyAccessSchema, insertDemoRequestSchema } from "@shared/schema";
 import { ArrowRight, CheckCircle2, Play, Building2, User2, Mail, Phone, Stethoscope } from "lucide-react";
 import { motion } from "framer-motion";
 
 // --- Components for sections ---
 
 function HeroSection() {
-  const earlyAccess = useEarlyAccess();
+  const [isJoined, setIsJoined] = useState(false);
   const form = useForm({
-    resolver: zodResolver(insertEarlyAccessSchema),
     defaultValues: { email: "" },
   });
 
   const onSubmit = (data: { email: string }) => {
-    earlyAccess.mutate(data, {
-      onSuccess: () => form.reset(),
-    });
+    console.log("Early Access Email:", data.email);
+    setIsJoined(true);
+    form.reset();
   };
 
   return (
     <section className="relative overflow-hidden pt-12 pb-20 lg:pt-32 lg:pb-32">
-      {/* Abstract Background Shapes */}
       <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-red-50 rounded-full blur-3xl opacity-50 translate-x-1/4 -translate-y-1/4" />
       <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-blue-50 rounded-full blur-3xl opacity-50 -translate-x-1/4 translate-y-1/4" />
 
@@ -54,37 +49,41 @@ function HeroSection() {
             </p>
 
             <div className="bg-white p-2 rounded-2xl shadow-lg border border-slate-100 max-w-md">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="flex-1 mb-0 space-y-0">
-                        <FormControl>
-                          <Input 
-                            placeholder="Enter your email" 
-                            className="border-0 shadow-none focus-visible:ring-0 pl-4 h-12 bg-transparent text-base"
-                            {...field} 
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    disabled={earlyAccess.isPending}
-                    className="h-12 px-8 rounded-xl font-semibold shadow-md shadow-red-200 hover:shadow-lg transition-all"
-                  >
-                    {earlyAccess.isPending ? "Joining..." : "Join Early Access"}
-                  </Button>
-                </form>
-              </Form>
+              {isJoined ? (
+                <div className="h-12 flex items-center px-4 text-green-600 font-medium">
+                  <CheckCircle2 className="w-5 h-5 mr-2" /> Thanks for joining!
+                </div>
+              ) : (
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-2">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="flex-1 mb-0 space-y-0">
+                          <FormControl>
+                            <Input 
+                              type="email"
+                              required
+                              placeholder="Enter your email" 
+                              className="border-0 shadow-none focus-visible:ring-0 pl-4 h-12 bg-transparent text-base"
+                              {...field} 
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      className="h-12 px-8 rounded-xl font-semibold shadow-md shadow-red-200 hover:shadow-lg transition-all"
+                    >
+                      Join Early Access
+                    </Button>
+                  </form>
+                </Form>
+              )}
             </div>
-            <p className="mt-4 text-sm text-slate-400 pl-4">
-              Be the first to know when we launch. No spam, ever.
-            </p>
           </div>
 
           <motion.div 
@@ -94,7 +93,6 @@ function HeroSection() {
             className="relative"
           >
             <div className="aspect-video rounded-3xl overflow-hidden bg-slate-900 shadow-2xl shadow-slate-200 border-8 border-white relative group cursor-pointer">
-              {/* This is the Video Placeholder */}
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 text-white">
                 <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Play className="w-8 h-8 text-white fill-white ml-1" />
@@ -102,22 +100,7 @@ function HeroSection() {
                 <h3 className="font-display font-semibold text-xl">Talking Pills Demo</h3>
                 <p className="text-slate-400 mt-2">Watch how it works</p>
               </div>
-              
-              {/* Simulate UI elements inside the "app" */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
-                    <Stethoscope className="w-5 h-5 text-red-400" />
-                  </div>
-                  <div>
-                    <div className="h-2 w-24 bg-white/20 rounded mb-1.5" />
-                    <div className="h-2 w-16 bg-white/10 rounded" />
-                  </div>
-                </div>
-              </div>
             </div>
-            
-            {/* Decorative dots grid */}
             <div className="absolute -z-10 -bottom-10 -left-10 w-full h-full opacity-30 bg-[radial-gradient(#EF4444_1px,transparent_1px)] [background-size:20px_20px]" />
           </motion.div>
         </div>
@@ -166,9 +149,8 @@ function MissionSection() {
 }
 
 function DemoSection() {
-  const demoRequest = useDemoRequest();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const form = useForm({
-    resolver: zodResolver(insertDemoRequestSchema),
     defaultValues: {
       orgName: "",
       fullName: "",
@@ -180,9 +162,9 @@ function DemoSection() {
   });
 
   const onSubmit = (data: any) => {
-    demoRequest.mutate(data, {
-      onSuccess: () => form.reset(),
-    });
+    console.log("Demo Request Data:", data);
+    setIsSubmitted(true);
+    form.reset();
   };
 
   const orgTypes = [
@@ -190,7 +172,7 @@ function DemoSection() {
   ];
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section id="contact" className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="lg:sticky lg:top-32">
@@ -216,146 +198,139 @@ function DemoSection() {
                 </div>
               ))}
             </div>
-
-            <div className="mt-12 p-6 bg-slate-50 rounded-2xl border border-slate-100">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 overflow-hidden">
-                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`} alt="Avatar" />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-sm font-medium text-slate-900">
-                  Trusted by leading health orgs
-                </div>
-              </div>
-            </div>
           </div>
 
           <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 p-8 lg:p-10">
-            <h3 className="text-xl font-bold mb-6">Request a Demo</h3>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-                <FormField
-                  control={form.control}
-                  name="orgName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Organization Name</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Building2 className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <Input className="pl-9" placeholder="Acme Health" {...field} />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="grid md:grid-cols-2 gap-5">
-                  <FormField
-                    control={form.control}
-                    name="fullName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Full Name</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <User2 className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                            <Input className="pl-9" placeholder="John Doe" {...field} />
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="role"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Role / Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Clinical Director" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+            {isSubmitted ? (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 className="w-8 h-8 text-green-600" />
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-5">
-                  <FormField
-                    control={form.control}
-                    name="workEmail"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Work Email</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                            <Input className="pl-9" placeholder="john@company.com" {...field} />
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Phone Number</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                            <Input className="pl-9" placeholder="+1 (555) 000-0000" {...field} />
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="orgType"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Organization Type</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select type" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {orgTypes.map((type) => (
-                            <SelectItem key={type} value={type}>{type}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Button 
-                  type="submit" 
-                  className="w-full h-12 text-base font-semibold mt-4 bg-primary hover:bg-primary/90"
-                  disabled={demoRequest.isPending}
-                >
-                  {demoRequest.isPending ? "Submitting..." : "Schedule Demo"}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <h3 className="text-2xl font-bold mb-2">Request Received!</h3>
+                <p className="text-slate-600">We'll reach out to your team shortly to schedule your demo.</p>
+                <Button onClick={() => setIsSubmitted(false)} variant="outline" className="mt-8">
+                  Send another request
                 </Button>
-              </form>
-            </Form>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-xl font-bold mb-6">Request a Demo</h3>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                    <FormField
+                      control={form.control}
+                      name="orgName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Organization Name</FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Building2 className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                              <Input required className="pl-9" placeholder="Acme Health" {...field} />
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <div className="grid md:grid-cols-2 gap-5">
+                      <FormField
+                        control={form.control}
+                        name="fullName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Full Name</FormLabel>
+                            <FormControl>
+                              <div className="relative">
+                                <User2 className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                <Input required className="pl-9" placeholder="John Doe" {...field} />
+                              </div>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="role"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Role / Title</FormLabel>
+                            <FormControl>
+                              <Input required placeholder="Clinical Director" {...field} />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-5">
+                      <FormField
+                        control={form.control}
+                        name="workEmail"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Work Email</FormLabel>
+                            <FormControl>
+                              <div className="relative">
+                                <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                <Input type="email" required className="pl-9" placeholder="john@company.com" {...field} />
+                              </div>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Phone Number</FormLabel>
+                            <FormControl>
+                              <div className="relative">
+                                <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                <Input required className="pl-9" placeholder="+1 (555) 000-0000" {...field} />
+                              </div>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="orgType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Organization Type</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value} required>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select type" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {orgTypes.map((type) => (
+                                <SelectItem key={type} value={type}>{type}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button 
+                      type="submit" 
+                      className="w-full h-12 text-base font-semibold mt-4 bg-primary hover:bg-primary/90"
+                    >
+                      Schedule Demo
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </form>
+                </Form>
+              </>
+            )}
           </div>
         </div>
       </div>
