@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -6,13 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, Play, Building2, User2, Mail, Phone, Stethoscope } from "lucide-react";
+import { ArrowRight, CheckCircle2, Play, Building2, User2, Mail, Phone, Stethoscope, Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 
 // --- Components for sections ---
 
 function HeroSection() {
   const [isJoined, setIsJoined] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const form = useForm({
     defaultValues: { email: "" },
   });
@@ -21,6 +24,13 @@ function HeroSection() {
     console.log("Early Access Email:", data.email);
     setIsJoined(true);
     form.reset();
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
   };
 
   return (
@@ -94,17 +104,31 @@ function HeroSection() {
             {/* App UI Simulation from Image */}
             <div className="relative w-full max-w-[450px]">
               <div className="aspect-[3/4] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-red-200/50 border-[8px] md:border-[12px] border-white relative group">
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F8FAFC]">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white">
                   {/* Doctor Card UI */}
                   <div className="relative w-full h-full flex flex-col">
-                    <div className="flex-1 bg-slate-100 flex items-center justify-center overflow-hidden">
+                    <div className="flex-1 flex items-center justify-center overflow-hidden relative">
                       <video
+                        ref={videoRef}
                         src="/video/DemoVideo.mp4"
                         autoPlay
                         loop
+                        muted
                         playsInline
-                        className="w-full h-full "
+                        className="w-full h-full object-contain"
                       />
+                      <Button
+                        variant="secondary"
+                        size="icon"
+                        onClick={toggleMute}
+                        className="absolute bottom-4 right-4 rounded-full bg-white/80 backdrop-blur-sm border-none hover:bg-white transition-all shadow-lg"
+                      >
+                        {isMuted ? (
+                          <VolumeX className="h-4 w-4 text-slate-600" />
+                        ) : (
+                          <Volume2 className="h-4 w-4 text-primary" />
+                        )}
+                      </Button>
                     </div>
                     <div className="p-6 bg-white space-y-4">
                       <div className="flex items-center justify-between">
