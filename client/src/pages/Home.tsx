@@ -24,7 +24,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-32 lg:pb-48 bg-red-50/30">
+    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-25 lg:pb-48 bg-red-50/30">
       {/* Background Wave Aesthetic from Image */}
       <div className="absolute top-0 right-0 -z-10 w-full h-full overflow-hidden">
         <div className="absolute top-0 right-0 w-[80%] md:w-[60%] h-[120%] bg-white rounded-l-[10rem] md:rounded-l-[20rem] translate-x-1/4 -translate-y-1/4" />
@@ -37,12 +37,12 @@ function HeroSection() {
               <span className="flex h-2 w-2 rounded-full bg-red-600 mr-2 animate-pulse"></span>
               Coming Soon
             </div>
-            
+
             <h1 className="text-5xl lg:text-7xl font-display font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-8">
               Save time.<br />
               Healthcare online
             </h1>
-            
+
             <p className="text-lg text-[#64748B] mb-12 max-w-lg leading-relaxed">
               Now you do not need to download thousands of applications when there is one
             </p>
@@ -61,20 +61,20 @@ function HeroSection() {
                       render={({ field }) => (
                         <FormItem className="flex-1 mb-0 space-y-0">
                           <FormControl>
-                            <Input 
+                            <Input
                               type="email"
                               required
-                              placeholder="Enter your email" 
+                              placeholder="Enter your email"
                               className="border-0 shadow-none focus-visible:ring-0 pl-6 h-14 bg-transparent text-base rounded-full"
-                              {...field} 
+                              {...field}
                             />
                           </FormControl>
                         </FormItem>
                       )}
                     />
-                    <Button 
-                      type="submit" 
-                      size="lg" 
+                    <Button
+                      type="submit"
+                      size="lg"
                       className="h-14 px-10 rounded-full font-bold bg-primary hover:bg-primary/90 text-white transition-all text-lg w-full md:w-auto"
                     >
                       Get Started
@@ -85,7 +85,7 @@ function HeroSection() {
             </div>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -95,31 +95,37 @@ function HeroSection() {
             <div className="relative w-full max-w-[450px]">
               <div className="aspect-[3/4] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-red-200/50 border-[8px] md:border-[12px] border-white relative group">
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F8FAFC]">
-                   {/* Doctor Card UI */}
-                   <div className="relative w-full h-full flex flex-col">
-                      <div className="flex-1 bg-slate-100 flex items-center justify-center">
-                        <User2 className="w-24 h-24 text-slate-300" />
-                      </div>
-                      <div className="p-6 bg-white space-y-4">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-xs font-medium text-slate-400 uppercase">Dentist</p>
-                            <h4 className="text-lg font-bold">Dr. Hrubenger</h4>
-                          </div>
-                          <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center shadow-lg shadow-red-200">
-                            <Phone className="w-5 h-5 text-white fill-white" />
-                          </div>
+                  {/* Doctor Card UI */}
+                  <div className="relative w-full h-full flex flex-col">
+                    <div className="flex-1 bg-slate-100 flex items-center justify-center overflow-hidden">
+                      <video
+                        src="/video/DemoVideo.mp4"
+                        autoPlay
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-6 bg-white space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-xs font-medium text-slate-400 uppercase">Dentist</p>
+                          <h4 className="text-lg font-bold">Dr. Hrubenger</h4>
                         </div>
-                        <div className="flex gap-2">
-                           <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
-                             <User2 className="w-5 h-5 text-white" />
-                           </div>
-                           <div className="flex-1 h-10 rounded-xl bg-red-500 flex items-center justify-center">
-                             <Mail className="w-5 h-5 text-white" />
-                           </div>
+                        <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center shadow-lg shadow-red-200">
+                          <Phone className="w-5 h-5 text-white fill-white" />
                         </div>
                       </div>
-                   </div>
+                      <div className="flex gap-2">
+                        <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
+                          <User2 className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="flex-1 h-10 rounded-xl bg-red-500 flex items-center justify-center">
+                          <Mail className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -128,7 +134,7 @@ function HeroSection() {
                 <p className="text-xs text-slate-400 mb-1">Online queue</p>
                 <p className="text-2xl font-bold text-slate-900">48</p>
                 <div className="mt-2 h-8 w-full bg-red-50 rounded-lg overflow-hidden flex items-end">
-                   <div className="h-1/2 w-full bg-red-400" />
+                  <div className="h-1/2 w-full bg-red-400" />
                 </div>
               </div>
             </div>
@@ -137,18 +143,18 @@ function HeroSection() {
 
         {/* Stats Section from Image */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24 max-w-4xl">
-           <div className="space-y-1">
-             <h3 className="text-4xl font-bold text-[#1E293B]">4.9*</h3>
-             <p className="text-sm text-[#64748B]">Average platform specialists rating.</p>
-           </div>
-           <div className="space-y-1">
-             <h3 className="text-4xl font-bold text-[#1E293B]">HHS</h3>
-             <p className="text-sm text-[#64748B]">All government licences and certificates.</p>
-           </div>
-           <div className="space-y-1">
-             <h3 className="text-4xl font-bold text-[#1E293B]">2M+</h3>
-             <p className="text-sm text-[#64748B]">Online-consultations number last year.</p>
-           </div>
+          <div className="space-y-1">
+            <h3 className="text-4xl font-bold text-[#1E293B]">4.9*</h3>
+            <p className="text-sm text-[#64748B]">Average platform specialists rating.</p>
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-4xl font-bold text-[#1E293B]">HHS</h3>
+            <p className="text-sm text-[#64748B]">All government licences and certificates.</p>
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-4xl font-bold text-[#1E293B]">2M+</h3>
+            <p className="text-sm text-[#64748B]">Online-consultations number last year.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -226,10 +232,10 @@ function DemoSection() {
               Experience the platform
             </h2>
             <p className="text-lg text-slate-600 mb-8">
-              See how Talking Pills can transform your organization's patient outreach. 
+              See how Talking Pills can transform your organization's patient outreach.
               Schedule a personalized demo with our product team.
             </p>
-            
+
             <div className="space-y-6">
               {[
                 "Full walkthrough of the provider dashboard",
@@ -278,7 +284,7 @@ function DemoSection() {
                         </FormItem>
                       )}
                     />
-                    
+
                     <div className="grid md:grid-cols-2 gap-5">
                       <FormField
                         control={form.control}
@@ -295,7 +301,7 @@ function DemoSection() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={form.control}
                         name="role"
@@ -366,8 +372,8 @@ function DemoSection() {
                       )}
                     />
 
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       className="w-full h-12 text-base font-semibold mt-4 bg-primary hover:bg-primary/90"
                     >
                       Schedule Demo

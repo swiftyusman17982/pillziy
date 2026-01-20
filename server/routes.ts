@@ -1,10 +1,35 @@
 import type { Express } from "express";
 import type { Server } from "http";
+import { api } from "@shared/routes";
+import { insertEarlyAccessSchema, insertDemoRequestSchema, insertInvestorRequestSchema } from "@shared/schema";
 
-export async function registerRoutes(
-  httpServer: Server,
-  app: Express
-): Promise<Server> {
-  // Static site - no backend routes needed as per user request
+export async function registerRoutes(httpServer: Server, app: Express): Promise<Server> {
+  app.post(api.earlyAccess.create.path, async (req, res) => {
+    const parsed = insertEarlyAccessSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ message: "Invalid email address" });
+    }
+    console.log("Early Access Request:", parsed.data);
+    res.json({ success: true, message: "Welcome aboard!" });
+  });
+
+  app.post(api.demoRequest.create.path, async (req, res) => {
+    const parsed = insertDemoRequestSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ message: "Invalid request data" });
+    }
+    console.log("Demo Request:", parsed.data);
+    res.json({ success: true, message: "Request received" });
+  });
+
+  app.post(api.investorRequest.create.path, async (req, res) => {
+    const parsed = insertInvestorRequestSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ message: "Invalid request data" });
+    }
+    console.log("Investor Request:", parsed.data);
+    res.json({ success: true, message: "Deck requested" });
+  });
+
   return httpServer;
 }

@@ -16,10 +16,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-background flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2 group cursor-pointer">
-            <div className="bg-red-50 p-2 rounded-lg group-hover:bg-red-100 transition-colors">
-              <HeartPulse className="h-6 w-6 text-primary" />
-            </div>
+          <Link href="/" className="flex items-center cursor-pointer">
+            <img
+              src="/image/Logo.PNG"
+              alt="PILLziy Logo"
+              className="h-10 w-auto object-contain"
+            />
             <span className="font-display font-bold text-xl tracking-tight text-slate-900">
               PILLziy
             </span>
@@ -39,7 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               Login
             </Button>
             <Link href="/#contact-us">
-              <Button 
+              <Button
                 className="font-bold rounded-full bg-primary hover:bg-primary/90 text-white px-8"
               >
                 Get App
@@ -69,15 +71,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <footer className="border-t bg-slate-50 py-12">
         <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <HeartPulse className="h-5 w-5 text-primary" />
-              <span className="font-display font-bold text-lg">PILLziy</span>
+            <div className="flex items-center">
+              <img
+                src="/image/Logo.PNG"
+                alt="PILLziy Logo"
+                className="h-8 w-auto object-contain"
+              />
+              <span className="font-display font-bold text-xl tracking-tight text-slate-900">
+                PILLziy
+              </span>
             </div>
             <p className="text-sm text-slate-500 max-w-xs">
               Revolutionizing healthcare adherence through intelligent, patient-centric technology.
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Company</h4>
             <ul className="space-y-2 text-sm text-slate-600">
@@ -85,7 +93,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <li><a href="/#contact-us" className="hover:text-primary">Contact Us</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Legal</h4>
             <ul className="space-y-2 text-sm text-slate-600">
