@@ -33,6 +33,11 @@ function HeroSection() {
       <div className="container mx-auto px-4 relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="max-w-2xl">
+            <div className="inline-flex items-center rounded-full border border-red-100 bg-red-50 px-3 py-1 text-sm font-medium text-red-600 mb-6">
+              <span className="flex h-2 w-2 rounded-full bg-red-600 mr-2 animate-pulse"></span>
+              Coming Soon
+            </div>
+            
             <h1 className="text-5xl lg:text-7xl font-display font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-8">
               Save time.<br />
               Healthcare online
