@@ -21,7 +21,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <HeartPulse className="h-6 w-6 text-primary" />
             </div>
             <span className="font-display font-bold text-xl tracking-tight text-slate-900">
-              TalkingPills
+              PILLziy
             </span>
           </Link>
 
@@ -35,12 +35,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {link.label}
               </a>
             ))}
-            <Button variant="ghost" className="text-blue-500 font-bold hover:text-blue-600">
+            <Button variant="ghost" className="text-red-500 font-bold hover:text-red-600">
               Login
             </Button>
             <Link href="/#contact-us">
               <Button 
-                className="font-bold rounded-full bg-[#3B82F6] hover:bg-[#2563EB] text-white px-8"
+                className="font-bold rounded-full bg-primary hover:bg-primary/90 text-white px-8"
               >
                 Get App
               </Button>
@@ -71,7 +71,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <HeartPulse className="h-5 w-5 text-primary" />
-              <span className="font-display font-bold text-lg">TalkingPills</span>
+              <span className="font-display font-bold text-lg">PILLziy</span>
             </div>
             <p className="text-sm text-slate-500 max-w-xs">
               Revolutionizing healthcare adherence through intelligent, patient-centric technology.
@@ -85,7 +85,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <li><a href="/#contact-us" className="hover:text-primary">Contact Us</a></li>
             </ul>
           </div>
-
+          
           <div>
             <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Legal</h4>
             <ul className="space-y-2 text-sm text-slate-600">
@@ -97,14 +97,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div>
             <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Contact</h4>
             <div className="text-sm text-slate-600 space-y-2">
-              <p>hello@talkingpills.health</p>
+              <p>hello@pillziy.health</p>
               <p>+1 (555) 123-4567</p>
               <p>San Francisco, CA</p>
             </div>
           </div>
         </div>
         <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-200 text-center text-sm text-slate-400">
-          © {new Date().getFullYear()} Talking Pills Inc. All rights reserved.
+          © {new Date().getFullYear()} PILLziy Inc. All rights reserved.
         </div>
       </footer>
     </div>

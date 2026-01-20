@@ -24,7 +24,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-32 lg:pb-48 bg-[#F0F9FF]">
+    <section className="relative overflow-hidden pt-12 pb-20 lg:pt-32 lg:pb-48 bg-red-50/30">
       {/* Background Wave Aesthetic from Image */}
       <div className="absolute top-0 right-0 -z-10 w-full h-full overflow-hidden">
         <div className="absolute top-0 right-0 w-[60%] h-[120%] bg-white rounded-l-[20rem] translate-x-1/4 -translate-y-1/4" />
@@ -42,7 +42,7 @@ function HeroSection() {
               Now you do not need to download thousands of applications when there is one
             </p>
 
-            <div className="bg-white p-1.5 rounded-full shadow-xl shadow-blue-100/50 border border-slate-100 max-w-md flex items-center">
+            <div className="bg-white p-1.5 rounded-full shadow-xl shadow-red-100/50 border border-slate-100 max-w-md flex items-center">
               {isJoined ? (
                 <div className="h-14 flex items-center px-6 text-green-600 font-medium">
                   <CheckCircle2 className="w-5 h-5 mr-2" /> Thanks for joining!
@@ -70,7 +70,7 @@ function HeroSection() {
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="h-14 px-10 rounded-full font-bold bg-[#3B82F6] hover:bg-[#2563EB] text-white transition-all text-lg"
+                      className="h-14 px-10 rounded-full font-bold bg-primary hover:bg-primary/90 text-white transition-all text-lg"
                     >
                       Get Started
                     </Button>
@@ -88,7 +88,7 @@ function HeroSection() {
           >
             {/* App UI Simulation from Image */}
             <div className="relative w-full max-w-[450px]">
-              <div className="aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-blue-200/50 border-[12px] border-white relative group">
+              <div className="aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-red-200/50 border-[12px] border-white relative group">
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F8FAFC]">
                    {/* Doctor Card UI */}
                    <div className="relative w-full h-full flex flex-col">
@@ -109,7 +109,7 @@ function HeroSection() {
                            <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
                              <User2 className="w-5 h-5 text-white" />
                            </div>
-                           <div className="flex-1 h-10 rounded-xl bg-blue-500 flex items-center justify-center">
+                           <div className="flex-1 h-10 rounded-xl bg-red-500 flex items-center justify-center">
                              <Mail className="w-5 h-5 text-white" />
                            </div>
                         </div>
@@ -122,8 +122,8 @@ function HeroSection() {
               <div className="absolute -left-12 bottom-20 bg-white p-4 rounded-3xl shadow-xl border border-slate-50 w-32">
                 <p className="text-xs text-slate-400 mb-1">Online queue</p>
                 <p className="text-2xl font-bold text-slate-900">48</p>
-                <div className="mt-2 h-8 w-full bg-blue-50 rounded-lg overflow-hidden flex items-end">
-                   <div className="h-1/2 w-full bg-blue-400" />
+                <div className="mt-2 h-8 w-full bg-red-50 rounded-lg overflow-hidden flex items-end">
+                   <div className="h-1/2 w-full bg-red-400" />
                 </div>
               </div>
             </div>
