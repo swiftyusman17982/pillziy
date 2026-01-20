@@ -103,7 +103,7 @@ function HeroSection() {
                         autoPlay
                         loop
                         playsInline
-                        className="w-full h-full object-cover"
+                        className="w-full h-full "
                       />
                     </div>
                     <div className="p-6 bg-white space-y-4">
