@@ -27,7 +27,7 @@ function HeroSection() {
     <section className="relative overflow-hidden pt-12 pb-20 lg:pt-32 lg:pb-48 bg-red-50/30">
       {/* Background Wave Aesthetic from Image */}
       <div className="absolute top-0 right-0 -z-10 w-full h-full overflow-hidden">
-        <div className="absolute top-0 right-0 w-[60%] h-[120%] bg-white rounded-l-[20rem] translate-x-1/4 -translate-y-1/4" />
+        <div className="absolute top-0 right-0 w-[80%] md:w-[60%] h-[120%] bg-white rounded-l-[10rem] md:rounded-l-[20rem] translate-x-1/4 -translate-y-1/4" />
       </div>
 
       <div className="container mx-auto px-4 relative">
@@ -47,14 +47,14 @@ function HeroSection() {
               Now you do not need to download thousands of applications when there is one
             </p>
 
-            <div className="bg-white p-1.5 rounded-full shadow-xl shadow-red-100/50 border border-slate-100 max-w-md flex items-center">
+            <div className="bg-white p-1.5 rounded-2xl md:rounded-full shadow-xl shadow-red-100/50 border border-slate-100 max-w-md flex flex-col md:flex-row items-center">
               {isJoined ? (
                 <div className="h-14 flex items-center px-6 text-green-600 font-medium">
                   <CheckCircle2 className="w-5 h-5 mr-2" /> Thanks for joining!
                 </div>
               ) : (
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col md:flex-row w-full gap-2 md:gap-0">
                     <FormField
                       control={form.control}
                       name="email"
@@ -75,7 +75,7 @@ function HeroSection() {
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="h-14 px-10 rounded-full font-bold bg-primary hover:bg-primary/90 text-white transition-all text-lg"
+                      className="h-14 px-10 rounded-full font-bold bg-primary hover:bg-primary/90 text-white transition-all text-lg w-full md:w-auto"
                     >
                       Get Started
                     </Button>
@@ -89,11 +89,11 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative flex justify-center"
+            className="relative flex justify-center mt-12 lg:mt-0"
           >
             {/* App UI Simulation from Image */}
             <div className="relative w-full max-w-[450px]">
-              <div className="aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-red-200/50 border-[12px] border-white relative group">
+              <div className="aspect-[3/4] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-red-200/50 border-[8px] md:border-[12px] border-white relative group">
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F8FAFC]">
                    {/* Doctor Card UI */}
                    <div className="relative w-full h-full flex flex-col">
@@ -136,7 +136,7 @@ function HeroSection() {
         </div>
 
         {/* Stats Section from Image */}
-        <div className="grid md:grid-cols-3 gap-12 mt-24 max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24 max-w-4xl">
            <div className="space-y-1">
              <h3 className="text-4xl font-bold text-[#1E293B]">4.9*</h3>
              <p className="text-sm text-[#64748B]">Average platform specialists rating.</p>
