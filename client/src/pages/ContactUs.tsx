@@ -3,9 +3,22 @@ import { useForm } from "react-hook-form";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+        Select,
+        SelectContent,
+        SelectItem,
+        SelectTrigger,
+        SelectValue,
+} from "@/components/ui/select";
+import {
+        Form,
+        FormControl,
+        FormField,
+        FormItem,
+        FormLabel,
+        FormMessage,
+} from "@/components/ui/form";
+import { Card } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, Building2, User2, Mail, Phone } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -35,7 +48,8 @@ export default function ContactUs() {
                         setIsSubmitted(true);
                         toast({
                                 title: "Success!",
-                                description: "Your demo request has been received.",
+                                description: "Your message has been sent. 🎉",
+                                duration: 5000,
                         });
                         form.reset();
                 },
@@ -64,24 +78,23 @@ export default function ContactUs() {
         ];
 
         return (
-
                 <section className="py-24 md:py-32 bg-gradient-to-b from-white to-slate-50">
                         <div className="container mx-auto px-4">
                                 <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
                                         {/* Left - Text */}
                                         <div className="lg:sticky lg:top-24">
                                                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-8">
-                                                        Experience the platform
+                                                        Experience PILLziy
                                                 </h1>
                                                 <p className="text-xl text-slate-600 mb-10 leading-relaxed">
-                                                        See how Talking Pills can transform your organization's patient outreach. Schedule a personalized demo with our product team.
+                                                        See how AI powered Talking Pills can upgrade your patient education and reduce follow up confusion. Schedule a personalized demo with the PILLziy team.
                                                 </p>
 
                                                 <div className="space-y-6">
                                                         {[
-                                                                "Full walkthrough of the provider dashboard",
-                                                                "Custom implementation strategy session",
-                                                                "Pricing and ROI analysis for your scale",
+                                                                "Full walkthrough of the pharmacy and provider dashboard",
+                                                                "Custom rollout and implementation plan for your workflow",
+                                                                "Pricing, ROI, and outcomes review for your scale",
                                                         ].map((item, i) => (
                                                                 <div key={i} className="flex items-center gap-4">
                                                                         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
@@ -94,7 +107,7 @@ export default function ContactUs() {
                                         </div>
 
                                         {/* Right - Form */}
-                                        <Card className="border-none shadow-2xl shadow-slate-200/50 p-8 lg:p-12">
+                                        <Card className="border-none shadow-2xl shadow-slate-200/50 p-8 lg:p-12 bg-white">
                                                 {isSubmitted ? (
                                                         <div className="text-center py-16">
                                                                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
@@ -102,15 +115,19 @@ export default function ContactUs() {
                                                                 </div>
                                                                 <h2 className="text-3xl font-bold mb-4">Request Received!</h2>
                                                                 <p className="text-xl text-slate-600 mb-8">
-                                                                        We'll reach out to your team shortly to schedule your demo.
+                                                                        We'll reach out to your team shortly.
                                                                 </p>
-                                                                <Button onClick={() => setIsSubmitted(false)} variant="outline" size="lg">
-                                                                        Send another request
+                                                                <Button
+                                                                        onClick={() => setIsSubmitted(false)}
+                                                                        variant="outline"
+                                                                        size="lg"
+                                                                >
+                                                                        Send another message
                                                                 </Button>
                                                         </div>
                                                 ) : (
                                                         <>
-                                                                <h2 className="text-3xl font-bold mb-10">Contact Us</h2>
+                                                                <h2 className="text-3xl font-bold mb-10 text-slate-900">Contact Us</h2>
                                                                 <Form {...form}>
                                                                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                                                                                 <FormField
@@ -190,7 +207,7 @@ export default function ContactUs() {
                                                                                                                 <FormControl>
                                                                                                                         <div className="relative">
                                                                                                                                 <Phone className="absolute left-4 top-5 h-5 w-5 text-slate-400" />
-                                                                                                                                <Input required className="pl-12 h-14" placeholder="Enter phone number" {...field} type="number" />
+                                                                                                                                <Input required className="pl-12 h-14" placeholder=" (000) 000-0000" {...field} type="tel" />
                                                                                                                         </div>
                                                                                                                 </FormControl>
                                                                                                                 <FormMessage />
@@ -215,9 +232,7 @@ export default function ContactUs() {
                                                                                                                                 <SelectValue placeholder="Select organization type" />
                                                                                                                         </SelectTrigger>
                                                                                                                 </FormControl>
-                                                                                                                <SelectContent
-                                                                                                                        className="bg-white border border-slate-200 shadow-xl max-h-[300px] overflow-y-auto"
-                                                                                                                >
+                                                                                                                <SelectContent className="bg-white border border-slate-200 shadow-xl max-h-[300px] overflow-y-auto">
                                                                                                                         {orgTypes.map((type) => (
                                                                                                                                 <SelectItem
                                                                                                                                         key={type}
@@ -236,10 +251,10 @@ export default function ContactUs() {
 
                                                                                 <Button
                                                                                         type="submit"
-                                                                                        className="w-full h-14 text-lg font-semibold mt-6 bg-primary hover:bg-primary/90"
+                                                                                        className="w-full h-14 text-lg font-semibold mt-6 bg-primary hover:bg-primary/90 transition-colors"
                                                                                         disabled={mutation.isPending}
                                                                                 >
-                                                                                        {mutation.isPending ? "Sending..." : "Schedule Demo"}
+                                                                                        {mutation.isPending ? "Sending..." : "Submit"}
                                                                                         <ArrowRight className="ml-3 h-5 w-5" />
                                                                                 </Button>
                                                                         </form>
@@ -250,6 +265,5 @@ export default function ContactUs() {
                                 </div>
                         </div>
                 </section>
-
         );
 }

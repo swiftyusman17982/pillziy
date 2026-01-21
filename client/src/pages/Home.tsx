@@ -4,16 +4,17 @@ import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Card } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, Volume2, VolumeX } from "lucide-react";
+import { CheckCircle2, Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@shared/routes";
+import { Link } from "wouter";
 
 function HeroSection() {
   const [isJoined, setIsJoined] = useState(false);
+  const [showEmailForm, setShowEmailForm] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -28,6 +29,7 @@ function HeroSection() {
     },
     onSuccess: () => {
       setIsJoined(true);
+      setShowEmailForm(false);
       toast({
         title: "Success!",
         description: "You've been added to our early access list.",
@@ -63,28 +65,65 @@ function HeroSection() {
 
       <div className="container mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left - Text & Form */}
+          {/* Left - Text & Buttons */}
           <div className="max-w-2xl">
-            {/* <div className="inline-flex items-center rounded-full border border-red-100 bg-red-50 px-4 py-1.5 text-sm font-medium text-red-600 mb-6">
-              <span className="flex h-2 w-2 rounded-full bg-red-600 mr-2 animate-pulse"></span>
-              Coming Soon
-            </div> */}
-
-            <h1 className="text-5xl lg:text-7xl font-display font-bold tracking-tight text-slate-900 leading-[1.1] mb-8">
-              Save time.<br />
-              Healthcare online
+            <h1 className="text-4xl lg:text-6xl font-display font-bold tracking-tight text-slate-900 leading-[1.1] mb-8">
+              Understand your prescription<br />in 10 seconds.
             </h1>
 
-            <p className="text-xl text-slate-600 mb-10 max-w-lg leading-relaxed">
-              One app for all your healthcare needs — no more downloading dozens of applications.
+            <p className="text-xl text-slate-600 mb-12 max-w-lg leading-relaxed">
+              PILLziy generates a talking 3D pill and body animation that uses AI to make medication instructions clear for every patient, any language, any literacy level.
             </p>
 
-            <div className="bg-white p-2 rounded-2xl shadow-2xl shadow-red-100/40 border border-slate-100 max-w-md">
-              {isJoined ? (
-                <div className="h-14 flex items-center justify-center px-6 text-green-600 font-medium text-lg">
-                  <CheckCircle2 className="w-6 h-6 mr-3" /> Thank you for joining!
-                </div>
-              ) : (
+            {/* Two Buttons */}
+            {!isJoined && (
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md w-full">
+                <Button
+                  size="lg"
+                  className="
+        h-14
+        w-full
+        px-8
+        flex items-center justify-center
+        font-bold text-lg leading-none
+        bg-primary hover:bg-primary/90
+        text-white
+        rounded-full
+        shadow-md hover:shadow-lg
+      "
+                  onClick={() => setShowEmailForm(true)}
+                >
+                  Join Early Access
+                </Button>
+
+                {/* Outline Button */}
+                <Link href="/contact-us" className="w-full">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="
+          h-14
+          w-full
+          px-8
+          flex items-center justify-center
+          font-bold text-lg leading-none
+          border-2 border-primary
+          text-primary hover:bg-primary/10
+          rounded-full
+          shadow-md hover:shadow-lg
+        "
+                  >
+                    Request a Demo
+                  </Button>
+                </Link>
+              </div>
+            )}
+
+
+
+            {/* Email Form - appears when "Join Early Access" is clicked */}
+            {showEmailForm && !isJoined && (
+              <div className="mt-8 p-4 bg-white rounded-2xl shadow-xl border border-slate-100 max-w-md">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col md:flex-row w-full gap-3">
                     <FormField
@@ -97,7 +136,7 @@ function HeroSection() {
                               type="email"
                               required
                               placeholder="Enter your email"
-                              className="border-0 shadow-none focus-visible:ring-0 pl-6 h-14 text-base rounded-xl md:rounded-full"
+                              className="border-0 shadow-none focus-visible:ring-0 pl-6 h-14 text-base rounded-xl md:rounded-full bg-transparent"
                               {...field}
                             />
                           </FormControl>
@@ -108,15 +147,23 @@ function HeroSection() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="h-14 px-10 rounded-xl md:rounded-full font-bold bg-primary hover:bg-primary/90 text-white text-lg w-full md:w-auto"
+                      className="h-14 px-8 rounded-xl md:rounded-full font-bold bg-primary hover:bg-primary/90 text-white text-lg w-full md:w-auto"
                       disabled={mutation.isPending}
                     >
-                      {mutation.isPending ? "Joining..." : "Get Early Access"}
+                      {mutation.isPending ? "Joining..." : "Join"}
                     </Button>
                   </form>
                 </Form>
-              )}
-            </div>
+              </div>
+            )}
+
+            {isJoined && (
+              <div className="mt-8 p-4 bg-green-50 rounded-2xl border border-green-200 max-w-md text-center">
+                <div className="flex items-center justify-center text-green-600 font-medium text-lg">
+                  <CheckCircle2 className="w-6 h-6 mr-3" /> Thank you for joining!
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right - Video Preview */}

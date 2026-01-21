@@ -23,34 +23,37 @@ export default function Mission() {
 
         return (
 
-                <section className="py-24 md:py-32 bg-slate-50 border-y border-slate-100">
+                <section className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50">
                         <div className="container mx-auto px-4">
-                                <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-                                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 mb-6">
-                                                Our Mission
-                                        </h1>
-                                        <p className="text-xl text-slate-600 leading-relaxed">
-                                                We exist to simplify the complex world of medication management. By combining human empathy with scalable technology, we ensure no patient is left confused about their health.
-                                        </p>
-                                </div>
+                                {/* Mission Statement + Image Section */}
+                                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+                                        {/* Left: Text */}
+                                        <div className="space-y-8">
+                                                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 leading-tight">
+                                                        Our Mission
+                                                </h1>
 
-                                <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-                                        {features.map((f, i) => (
-                                                <Card
-                                                        key={i}
-                                                        className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
-                                                >
-                                                        <CardHeader>
-                                                                <div className="w-16 h-16 rounded-2xl bg-red-50 flex items-center justify-center mb-6">
-                                                                        <f.icon className="w-8 h-8 text-primary" />
-                                                                </div>
-                                                                <CardTitle className="text-2xl">{f.title}</CardTitle>
-                                                        </CardHeader>
-                                                        <CardContent>
-                                                                <p className="text-lg text-slate-600 leading-relaxed">{f.desc}</p>
-                                                        </CardContent>
-                                                </Card>
-                                        ))}
+                                                <div className="space-y-6 text-lg md:text-xl text-slate-700 leading-relaxed">
+                                                        <p>
+                                                                PILLziy’s mission is to eliminate medication confusion at global scale by transforming every prescription into an AI powered, spoken, visual experience that patients can actually understand. We exist so no one has to guess what a pill is for, how to take it, what to avoid, or what happens if a dose is missed. By making medication guidance clear across any language and any literacy level, PILLziy helps patients take medicines safely and correctly, supports caregivers who manage complex routines, and reduces preventable harm caused by misunderstanding.
+                                                        </p>
+
+                                                        <p>
+                                                                Our long term mission is to become the universal medication understanding layer trusted by pharmacies, clinicians, and patients, improving adherence, outcomes, and dignity for millions of people.
+                                                        </p>
+                                                </div>
+                                        </div>
+
+                                        {/* Right: Image */}
+                                        <div className="relative rounded-2xl overflow-hidden ">
+
+                                                <img
+                                                        src="/image/Our_Mission.png"
+                                                        alt="PILLziy Mission - Empowering Medication Understanding"
+                                                        className="w-full h-auto object-contain lg:aspect-[3/3] lg:aspect-square"
+                                                />
+
+                                        </div>
                                 </div>
                         </div>
                 </section>
