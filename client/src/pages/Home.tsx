@@ -154,7 +154,7 @@ function HeroSection() {
               </div>
 
               {/* Floatings cards */}
-              <div className="absolute -left-12 bottom-20 bg-white p-4 rounded-3xl shadow-xl border border-slate-50 w-32">
+              <div className="hidden md:block absolute -left-12 bottom-20 bg-white p-4 rounded-3xl shadow-xl border border-slate-50 w-32">
                 <p className="text-xs text-slate-400 mb-1">Online queue</p>
                 <p className="text-2xl font-bold text-slate-900">48</p>
                 <div className="mt-2 h-8 w-full bg-red-50 rounded-lg overflow-hidden flex items-end">

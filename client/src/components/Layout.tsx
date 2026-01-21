@@ -1,7 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { HeartPulse } from "lucide-react";
+import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -49,11 +50,51 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </Link>
           </nav>
 
-          {/* Mobile Menu Placeholder - kept simple for this MVP */}
+          {/* Mobile Menu */}
           <div className="md:hidden">
-            <Link href="/#contact-us">
-              <Button size="sm">Demo</Button>
-            </Link>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-slate-600">
+                  <Menu className="h-8 w-8" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <SheetHeader className="text-left">
+                  <SheetTitle className="flex items-center gap-2">
+                    <img
+                      src="/image/Logo.PNG"
+                      alt="PILLziy Logo"
+                      className="h-8 w-auto object-contain"
+                    />
+                    <span className="font-display font-bold text-xl tracking-tight text-slate-900">
+                      PILLziy
+                    </span>
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col gap-6 mt-12">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="text-lg font-medium text-slate-600 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                  <hr className="border-slate-100" />
+                  <div className="flex flex-col gap-4 pt-2">
+                    <Button variant="ghost" className="text-red-500 font-bold hover:text-red-600 justify-start px-0">
+                      Login
+                    </Button>
+                    <Link href="/#contact-us">
+                      <Button className="w-full font-bold rounded-full bg-primary hover:bg-primary/90 text-white">
+                        Get App
+                      </Button>
+                    </Link>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </header>
