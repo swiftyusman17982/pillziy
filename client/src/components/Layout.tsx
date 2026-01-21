@@ -16,7 +16,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="container pr-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center cursor-pointer">
             <img
               src="/image/Logo.PNG"
