@@ -39,7 +39,7 @@ export async function sendDemoRequestEmail(data: InsertDemoRequest) {
         const info = await transporter.sendMail({
                 from: process.env.SMTP_FROM || process.env.SMTP_USER,
                 to: adminEmail,
-                subject: `New Demo Request from ${data.fullName}`,
+                subject: `Contact Us from ${data.fullName}`,
                 text: `
 Organization Name: ${data.orgName}
 Full Name: ${data.fullName}
@@ -49,7 +49,7 @@ Organization Type: ${data.orgType}
 Phone: ${data.phone}
     `,
                 html: `
-<h2>New Demo Request</h2>
+<h2>Contact Us</h2>
 <p><strong>Organization Name:</strong> ${data.orgName}</p>
 <p><strong>Full Name:</strong> ${data.fullName}</p>
 <p><strong>Work Email:</strong> ${data.workEmail}</p>
