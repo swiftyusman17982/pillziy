@@ -2,55 +2,69 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetClose,
+} from "@/components/ui/sheet";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
 
+  // Navigation items: only Home and Mission as regular links
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/#mission", label: "Mission" },
-    { href: "/#contact-us", label: "Contact Us" },
+    { href: "/mission", label: "Mission" },
   ];
+
+  // Contact Us as a separate button
+  const contactLink = { href: "/contact-us", label: "Contact Us" };
 
   return (
     <div className="min-h-screen bg-background flex flex-col font-sans">
       <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto pr-4 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          {/* Logo */}
           <Link href="/" className="flex items-center cursor-pointer">
             <img
-              src="/image/Logo.PNG"
+              src="/image/newLogo.png"
               alt="PILLziy Logo"
               className="h-10 w-auto object-contain"
             />
-            <span className="font-display font-bold text-xl tracking-tight text-slate-900">
-              PILLziy
+            <span className="font-display font-bold text-xl pl-2 tracking-tight text-slate-900">
+              ILLziy
             </span>
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                className={`text-sm font-medium transition-colors ${location === link.href
+                  ? "text-primary font-semibold"
+                  : "text-slate-600 hover:text-primary"
+                  }`}
               >
                 {link.label}
               </a>
             ))}
-            <Button variant="ghost" className="text-red-500 font-bold hover:text-red-600">
-              Login
-            </Button>
-            <Link href="/#contact-us">
+
+            {/* Contact Us Button */}
+            <a href={contactLink.href}>
               <Button
-                className="font-bold rounded-full bg-primary hover:bg-primary/90 text-white px-8"
+                className="font-bold rounded-full bg-primary hover:bg-primary/90 text-white px-8 py-3"
               >
-                Get App
+                {contactLink.label}
               </Button>
-            </Link>
+            </a>
           </nav>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
@@ -63,43 +77,51 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <div className="flex items-center justify-between w-full">
                     <SheetTitle className="flex items-center gap-2">
                       <img
-                        src="/image/Logo.PNG"
+                        src="/image/newLogo.png"
                         alt="PILLziy Logo"
                         className="h-8 w-auto object-contain"
                       />
                       <span className="font-display font-bold text-xl tracking-tight text-slate-900">
-                        PILLziy
+                        ILLziy
                       </span>
                     </SheetTitle>
                     <SheetClose asChild>
-                      <Button variant="ghost" size="icon" className="text-slate-600 hover:text-red-500 transition-colors">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-slate-600 hover:text-red-500 transition-colors"
+                      >
                         <X className="h-8 w-8 stroke-[2.5px]" />
                         <span className="sr-only">Close</span>
                       </Button>
                     </SheetClose>
                   </div>
                 </SheetHeader>
+
+                {/* Mobile Navigation */}
                 <nav className="flex flex-col gap-6 mt-12">
                   {navLinks.map((link) => (
                     <a
                       key={link.label}
                       href={link.href}
-                      className="text-lg font-medium text-slate-600 hover:text-primary transition-colors"
+                      className={`text-lg font-medium transition-colors ${location === link.href
+                        ? "text-primary font-semibold"
+                        : "text-slate-600 hover:text-primary"
+                        }`}
                     >
                       {link.label}
                     </a>
                   ))}
-                  <hr className="border-slate-100" />
-                  <div className="flex flex-col gap-4 pt-2">
-                    <Button variant="ghost" className="text-red-500 font-bold hover:text-red-600 justify-start px-0">
-                      Login
+
+                  {/* Divider (optional - uncomment if you want it) */}
+                  {/* <hr className="border-slate-100 my-6" /> */}
+
+                  {/* Contact Us Button in Mobile */}
+                  <a href={contactLink.href}>
+                    <Button className="w-full font-bold rounded-full bg-primary hover:bg-primary/90 text-white py-3 text-lg mt-4">
+                      {contactLink.label}
                     </Button>
-                    <Link href="/#contact-us">
-                      <Button className="w-full font-bold rounded-full bg-primary hover:bg-primary/90 text-white">
-                        Get App
-                      </Button>
-                    </Link>
-                  </div>
+                  </a>
                 </nav>
               </SheetContent>
             </Sheet>
@@ -116,54 +138,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </motion.div>
       </main>
-
-      <footer className="border-t bg-slate-50 py-12">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <img
-                src="/image/Logo.PNG"
-                alt="PILLziy Logo"
-                className="h-8 w-auto object-contain"
-              />
-              <span className="font-display font-bold text-xl tracking-tight text-slate-900">
-                PILLziy
-              </span>
-            </div>
-            <p className="text-sm text-slate-500 max-w-xs">
-              Revolutionizing healthcare adherence through intelligent, patient-centric technology.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Company</h4>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li><a href="/#mission" className="hover:text-primary">Mission</a></li>
-              <li><a href="/#contact-us" className="hover:text-primary">Contact Us</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Legal</h4>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li><span className="cursor-pointer hover:text-primary">Privacy Policy</span></li>
-              <li><span className="cursor-pointer hover:text-primary">Terms of Service</span></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Contact</h4>
-            <div className="text-sm text-slate-600 space-y-2">
-              <p>hello@pillziy.health</p>
-              <p>+1 (555) 123-4567</p>
-              <p>San Francisco, CA</p>
-            </div>
-          </div>
-        </div>
-        <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-200 text-center text-sm text-slate-400">
-          © {new Date().getFullYear()} PILLziy Inc. All rights reserved.
-        </div>
-      </footer>
     </div>
   );
 }
