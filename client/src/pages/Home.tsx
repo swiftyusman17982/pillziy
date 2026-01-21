@@ -72,7 +72,7 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl text-slate-600 mb-12 max-w-lg leading-relaxed">
-              PILLziy generates a talking 3D pill and body animation that uses AI to make medication instructions clear for every patient, any language, any literacy level.
+              <strong >Scan your prescription in the PILLziy app.</strong> PILLziy generates a talking 3D pill and body animation, using AI to deliver clear, personalized medication guidance across languages and literacy levels.
             </p>
 
             {/* Two Buttons */}

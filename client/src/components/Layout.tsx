@@ -34,7 +34,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               alt="PILLziy Logo"
               className="h-10 w-auto object-contain"
             />
-            <span className="font-display font-bold text-xl pl-2 tracking-tight text-slate-900">
+            <span className="font-display font-bold text-xl pt-5 tracking-tight text-slate-900">
               ILLziy
             </span>
           </Link>
@@ -75,13 +75,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <SheetContent side="right" className="w-[300px] sm:w-[400px] p-6">
                 <SheetHeader className="text-left">
                   <div className="flex items-center justify-between w-full">
-                    <SheetTitle className="flex items-center gap-2">
+                    <SheetTitle className="flex items-center">
                       <img
                         src="/image/newLogo.png"
                         alt="PILLziy Logo"
                         className="h-8 w-auto object-contain"
                       />
-                      <span className="font-display font-bold text-xl tracking-tight text-slate-900">
+                      <span className="font-display pt-4 font-bold text-xl tracking-tight text-slate-900">
                         ILLziy
                       </span>
                     </SheetTitle>
