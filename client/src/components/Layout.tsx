@@ -1,8 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -58,18 +58,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Menu className="h-8 w-8" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] p-6">
                 <SheetHeader className="text-left">
-                  <SheetTitle className="flex items-center gap-2">
-                    <img
-                      src="/image/Logo.PNG"
-                      alt="PILLziy Logo"
-                      className="h-8 w-auto object-contain"
-                    />
-                    <span className="font-display font-bold text-xl tracking-tight text-slate-900">
-                      PILLziy
-                    </span>
-                  </SheetTitle>
+                  <div className="flex items-center justify-between w-full">
+                    <SheetTitle className="flex items-center gap-2">
+                      <img
+                        src="/image/Logo.PNG"
+                        alt="PILLziy Logo"
+                        className="h-8 w-auto object-contain"
+                      />
+                      <span className="font-display font-bold text-xl tracking-tight text-slate-900">
+                        PILLziy
+                      </span>
+                    </SheetTitle>
+                    <SheetClose asChild>
+                      <Button variant="ghost" size="icon" className="text-slate-600 hover:text-red-500 transition-colors">
+                        <X className="h-8 w-8 stroke-[2.5px]" />
+                        <span className="sr-only">Close</span>
+                      </Button>
+                    </SheetClose>
+                  </div>
                 </SheetHeader>
                 <nav className="flex flex-col gap-6 mt-12">
                   {navLinks.map((link) => (
