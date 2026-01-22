@@ -19,6 +19,7 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
                                 defaultCountry={defaultCountry}
                                 value={value}
                                 onChange={onChange}
+                                forceDialCode={true}
                                 placeholder={placeholder}
                                 className={cn("flex w-full rounded-lg border border-input bg-background", className)}
                                 inputClassName={cn(

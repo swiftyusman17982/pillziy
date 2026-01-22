@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ function HeroSection() {
   const [showEmailForm, setShowEmailForm] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const emailFormRef = useRef<HTMLDivElement>(null);
 
   const form = useForm({
     defaultValues: { email: "" },
@@ -55,6 +56,37 @@ function HeroSection() {
     }
   };
 
+  const handleJoinEarlyAccess = () => {
+    setShowEmailForm(true);
+    setTimeout(() => {
+      emailFormRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 100);
+  };
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoRef.current?.play().catch(() => { });
+          } else {
+            videoRef.current?.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(videoRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-red-50/50 via-white to-red-50/30">
       {/* Background decorative */}
@@ -90,7 +122,7 @@ function HeroSection() {
         rounded-full
         shadow-md hover:shadow-lg
       "
-                  onClick={() => setShowEmailForm(true)}
+                  onClick={handleJoinEarlyAccess}
                 >
                   Join Early Access
                 </Button>
@@ -122,7 +154,7 @@ function HeroSection() {
 
             {/* Email Form - appears when "Join Early Access" is clicked */}
             {showEmailForm && !isJoined && (
-              <div className="mt-8 p-4 bg-white rounded-2xl shadow-xl border border-slate-100 max-w-md">
+              <div ref={emailFormRef} className="mt-8 p-4 bg-white rounded-2xl shadow-xl border border-slate-100 max-w-md">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col md:flex-row w-full gap-3">
                     <FormField
@@ -177,11 +209,10 @@ function HeroSection() {
                 <video
                   ref={videoRef}
                   src="/video/New_Demo.mp4"
-                  autoPlay
                   loop
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   className="w-full h-full object-cover"
                 />
                 <Button
