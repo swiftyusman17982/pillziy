@@ -47,9 +47,9 @@ export async function sendDemoRequestEmail(data: InsertDemoRequest) {
                 from: `"${data.fullName} via PILLziy" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
                 replyTo: data.workEmail,
                 to: adminEmail,
-                subject: `Request for a Pillziy demo from ${data.fullName}`,
+                subject: `Request for a PILLziy demo from ${data.fullName}`,
                 text: `
-Request for a Pillziy demo
+Request for a PILLziy demo
 ------------------------
 Organization Name: ${data.orgName}
 Full Name: ${data.fullName}
@@ -59,7 +59,7 @@ Organization Type: ${data.orgType}
 Phone: ${data.phone}
     `,
                 html: `
-<h2>Request for a Pillziy demo</h2>
+<h2>Request for a PILLziy demo</h2>
 <p><strong>Organization Name:</strong> ${data.orgName}</p>
 <p><strong>Full Name:</strong> ${data.fullName}</p>
 <p><strong>Work Email:</strong> ${data.workEmail}</p>

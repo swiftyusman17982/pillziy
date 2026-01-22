@@ -256,7 +256,7 @@ export default function ContactUs() {
 
                                                                                 <Button
                                                                                         type="submit"
-                                                                                        className="w-full h-14 text-lg font-semibold mt-6 bg-primary hover:bg-primary/90 transition-colors"
+                                                                                        className="w-full h-14 text-lg font-semibold mt-6 bg-primary hover:bg-primary/90 transition-colors rounded-full"
                                                                                         disabled={mutation.isPending}
                                                                                 >
                                                                                         {mutation.isPending ? "Sending..." : "Submit"}
