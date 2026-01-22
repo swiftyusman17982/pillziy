@@ -23,7 +23,9 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
   app.post(api.demoRequest.create.path, async (req, res) => {
     const parsed = insertDemoRequestSchema.safeParse(req.body);
     if (!parsed.success) {
-      return res.status(400).json({ message: "Invalid request data" });
+      const phoneError = parsed.error.errors.find((e: any) => e.path.includes('phone'));
+      const message = phoneError ? phoneError.message : "Invalid request data";
+      return res.status(400).json({ message });
     }
     console.log("Demo Request:", parsed.data);
     try {

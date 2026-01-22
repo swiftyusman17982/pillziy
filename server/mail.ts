@@ -44,11 +44,12 @@ export async function sendDemoRequestEmail(data: InsertDemoRequest) {
         console.log("📧 Sending demo request email to:", adminEmail);
 
         const info = await transporter.sendMail({
-                from: process.env.SMTP_FROM || process.env.SMTP_USER,
+                from: `"${data.fullName} via PILLziy" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+                replyTo: data.workEmail,
                 to: adminEmail,
-                subject: `Request for Demo PILLziy from ${data.fullName}`,
+                subject: `Request for a Pillziy demo from ${data.fullName}`,
                 text: `
-Request for Demo PILLziy
+Request for a Pillziy demo
 ------------------------
 Organization Name: ${data.orgName}
 Full Name: ${data.fullName}
@@ -58,7 +59,7 @@ Organization Type: ${data.orgType}
 Phone: ${data.phone}
     `,
                 html: `
-<h2>Request for Demo PILLziy</h2>
+<h2>Request for a Pillziy demo</h2>
 <p><strong>Organization Name:</strong> ${data.orgName}</p>
 <p><strong>Full Name:</strong> ${data.fullName}</p>
 <p><strong>Work Email:</strong> ${data.workEmail}</p>
@@ -82,7 +83,8 @@ export async function sendEarlyAccessEmail(email: string) {
         console.log(`📧 Attempting to send early access email for ${email} to admin: ${obfuscateEmail(adminEmail)}`);
 
         const info = await transporter.sendMail({
-                from: process.env.SMTP_FROM || process.env.SMTP_USER,
+                from: `"Early Access Waitlist" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+                replyTo: email,
                 to: adminEmail,
                 subject: `Join PILLziy Early Access: ${email}`,
                 text: `New user has joined the early access waitlist: ${email}`,

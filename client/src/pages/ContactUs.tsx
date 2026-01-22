@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,11 +25,14 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@shared/routes";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { insertDemoRequestSchema, type InsertDemoRequest } from "@shared/schema";
 
 export default function ContactUs() {
         const [isSubmitted, setIsSubmitted] = useState(false);
 
-        const form = useForm({
+        const form = useForm<InsertDemoRequest>({
+                resolver: zodResolver(insertDemoRequestSchema),
                 defaultValues: {
                         orgName: "",
                         fullName: "",
@@ -205,10 +209,12 @@ export default function ContactUs() {
                                                                                                         <FormItem>
                                                                                                                 <FormLabel>Phone Number</FormLabel>
                                                                                                                 <FormControl>
-                                                                                                                        <div className="relative">
-                                                                                                                                <Phone className="absolute left-4 top-5 h-5 w-5 text-slate-400" />
-                                                                                                                                <Input required className="pl-12 h-14" placeholder=" (000) 000-0000" {...field} type="tel" />
-                                                                                                                        </div>
+                                                                                                                        <PhoneInput
+                                                                                                                                {...field}
+                                                                                                                                defaultCountry="us"
+                                                                                                                                placeholder="Enter phone number"
+                                                                                                                                className="h-14"
+                                                                                                                        />
                                                                                                                 </FormControl>
                                                                                                                 <FormMessage />
                                                                                                         </FormItem>

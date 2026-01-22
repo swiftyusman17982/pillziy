@@ -177,7 +177,7 @@ function HeroSection() {
               <div className="aspect-[9/16] md:aspect-[3/4] rounded-3xl overflow-hidden bg-white shadow-2xl shadow-red-300/40 border-[10px] border-white">
                 <video
                   ref={videoRef}
-                  src="/video/DemoVideo.mp4"
+                  src="/video/New_Demo.mp4"
                   autoPlay
                   loop
                   muted
@@ -217,7 +217,7 @@ function FeaturesSection() {
       title: "Take the right dose, on time",
     },
     {
-      image: "/image/body-animation.png",
+      image: "/image/new_body_Animation.png",
       title: "See how it helps your body",
     },
   ];
@@ -235,19 +235,16 @@ function FeaturesSection() {
               viewport={{ once: true }}
               className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center"
             >
-              {/* Left - Text content */}
-              <div className="order-2 lg:order-1 flex flex-col justify-center">
+              {/* Text content - order changes based on index */}
+              <div className={`order-2 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'} flex flex-col justify-center`}>
                 <h2 className="text-3xl lg:text-5xl font-display font-bold tracking-tight text-slate-900 leading-[1.2] mb-6">
                   {feature.title}
                 </h2>
                 <div className="h-1.5 w-20 bg-primary rounded-full mb-8" />
-                {/* <p className="text-xl text-slate-600 leading-relaxed max-w-lg">
-                  Experience a new level of medication management with PILLziy's advanced visualization and personalized guidance.
-                </p> */}
               </div>
 
-              {/* Right - Image content */}
-              <div className="order-1 lg:order-2">
+              {/* Image content - order changes based on index */}
+              <div className={`order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
                 <div className="relative w-full aspect-[4/5] rounded-[3rem] overflow-hidden ">
                   <img
                     src={feature.image}

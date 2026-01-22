@@ -1,6 +1,7 @@
 import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { parsePhoneNumber } from "libphonenumber-js";
 
 export const earlyAccess = pgTable("early_access", {
         id: serial("id").primaryKey(),
@@ -44,6 +45,19 @@ export const insertDemoRequestSchema = createInsertSchema(demoRequests).pick({
         phone: true,
 }).extend({
         workEmail: z.string().email(),
+        phone: z.string().refine(
+                (value) => {
+                        try {
+                                const phoneNumber = parsePhoneNumber(value);
+                                return phoneNumber && phoneNumber.isValid();
+                        } catch {
+                                return false;
+                        }
+                },
+                {
+                        message: "Please enter a valid and complete phone number",
+                }
+        ),
 });
 
 export const insertInvestorRequestSchema = createInsertSchema(investorRequests).pick({
