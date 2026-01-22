@@ -1,11 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { api } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
 import type { InsertEarlyAccess, InsertDemoRequest, InsertInvestorRequest } from "@shared/schema";
 
 export function useEarlyAccess() {
   const { toast } = useToast();
-  
+
   return useMutation({
     mutationFn: async (data: InsertEarlyAccess) => {
       const res = await fetch(api.earlyAccess.create.path, {
@@ -13,14 +13,14 @@ export function useEarlyAccess() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      
+
       if (!res.ok) {
         if (res.status === 409) {
           throw new Error("This email is already on the list!");
         }
         throw new Error("Failed to join early access.");
       }
-      
+
       return res.json();
     },
     onSuccess: () => {
