@@ -27,6 +27,13 @@ transporter.verify((error) => {
         }
 });
 
+function obfuscateEmail(email: string | undefined): string {
+        if (!email) return "undefined";
+        const [name, domain] = email.split("@");
+        if (!domain) return email;
+        return `${name[0]}***@${domain}`;
+}
+
 export async function sendDemoRequestEmail(data: InsertDemoRequest) {
         const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_FROM;
 
@@ -39,8 +46,10 @@ export async function sendDemoRequestEmail(data: InsertDemoRequest) {
         const info = await transporter.sendMail({
                 from: process.env.SMTP_FROM || process.env.SMTP_USER,
                 to: adminEmail,
-                subject: `Contact Us from ${data.fullName}`,
+                subject: `Request for Demo PILLziy from ${data.fullName}`,
                 text: `
+Request for Demo PILLziy
+------------------------
 Organization Name: ${data.orgName}
 Full Name: ${data.fullName}
 Work Email: ${data.workEmail}
@@ -49,7 +58,7 @@ Organization Type: ${data.orgType}
 Phone: ${data.phone}
     `,
                 html: `
-<h2>Contact Us</h2>
+<h2>Request for Demo PILLziy</h2>
 <p><strong>Organization Name:</strong> ${data.orgName}</p>
 <p><strong>Full Name:</strong> ${data.fullName}</p>
 <p><strong>Work Email:</strong> ${data.workEmail}</p>
@@ -60,5 +69,29 @@ Phone: ${data.phone}
         });
 
         console.log("✅ Email sent successfully:", info.messageId);
+        return info;
+}
+
+export async function sendEarlyAccessEmail(email: string) {
+        const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_FROM;
+
+        if (!adminEmail) {
+                throw new Error("ADMIN_EMAIL or SMTP_FROM must be configured in .env");
+        }
+
+        console.log(`📧 Attempting to send early access email for ${email} to admin: ${obfuscateEmail(adminEmail)}`);
+
+        const info = await transporter.sendMail({
+                from: process.env.SMTP_FROM || process.env.SMTP_USER,
+                to: adminEmail,
+                subject: `Join PILLziy Early Access: ${email}`,
+                text: `New user has joined the early access waitlist: ${email}`,
+                html: `
+<h2>Join PILLziy Early Access</h2>
+<p><strong>Email:</strong> ${email}</p>
+    `,
+        });
+
+        console.log("✅ Early Access email sent successfully. Message ID:", info.messageId, "Response:", info.response);
         return info;
 }

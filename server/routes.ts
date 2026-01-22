@@ -2,7 +2,7 @@ import type { Express } from "express";
 import type { Server } from "http";
 import { api } from "@shared/routes";
 import { insertEarlyAccessSchema, insertDemoRequestSchema, insertInvestorRequestSchema } from "@shared/schema";
-import { sendDemoRequestEmail } from "./mail";
+import { sendDemoRequestEmail, sendEarlyAccessEmail } from "./mail";
 
 export async function registerRoutes(httpServer: Server, app: Express): Promise<Server> {
   app.post(api.earlyAccess.create.path, async (req, res) => {
@@ -11,7 +11,13 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
       return res.status(400).json({ message: "Invalid email address" });
     }
     console.log("Early Access Request:", parsed.data);
-    res.json({ success: true, message: "Welcome aboard!" });
+    try {
+      await sendEarlyAccessEmail(parsed.data.email);
+      res.json({ success: true, message: "Welcome aboard!" });
+    } catch (error) {
+      console.error("Failed to send early access email:", error);
+      res.status(500).json({ message: "Welcome aboard! (Email notification failed)" });
+    }
   });
 
   app.post(api.demoRequest.create.path, async (req, res) => {

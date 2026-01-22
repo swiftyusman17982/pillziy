@@ -206,8 +206,69 @@ function HeroSection() {
   );
 }
 
+function FeaturesSection() {
+  const features = [
+    {
+      image: "/image/scan-meds.png",
+      title: "Scan and identify your meds",
+    },
+    {
+      image: "/image/pill-mascot.png",
+      title: "Take the right dose, on time",
+    },
+    {
+      image: "/image/body-animation.png",
+      title: "See how it helps your body",
+    },
+  ];
+
+  return (
+    <section className="py-24 bg-white overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col gap-32">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center"
+            >
+              {/* Left - Text content */}
+              <div className="order-2 lg:order-1 flex flex-col justify-center">
+                <h2 className="text-3xl lg:text-5xl font-display font-bold tracking-tight text-slate-900 leading-[1.2] mb-6">
+                  {feature.title}
+                </h2>
+                <div className="h-1.5 w-20 bg-primary rounded-full mb-8" />
+                {/* <p className="text-xl text-slate-600 leading-relaxed max-w-lg">
+                  Experience a new level of medication management with PILLziy's advanced visualization and personalized guidance.
+                </p> */}
+              </div>
+
+              {/* Right - Image content */}
+              <div className="order-1 lg:order-2">
+                <div className="relative w-full aspect-[4/5] rounded-[3rem] overflow-hidden ">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full h-full object-contain p-8 md:p-12"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
-    <HeroSection />
+    <>
+      <HeroSection />
+      <FeaturesSection />
+    </>
   );
 }
