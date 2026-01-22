@@ -21,16 +21,19 @@ const PhoneInput = React.forwardRef<HTMLInputElement, PhoneInputProps>(
                                 onChange={onChange}
                                 forceDialCode={true}
                                 placeholder={placeholder}
-                                className={cn("flex w-full rounded-lg border border-input bg-background", className)}
+                                className={cn(
+                                        "flex w-full rounded-lg border border-input bg-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 items-center",
+                                        className
+                                )}
                                 inputClassName={cn(
-                                        "!w-full !h-full !text-base !bg-transparent !outline-none !shadow-none !px-4 !text-slate-900",
-                                        "placeholder:!text-slate-400 focus:!ring-2 focus:!ring-ring focus:!ring-offset-2"
+                                        "!w-full !h-full !text-base !bg-transparent !outline-none !shadow-none !px-4 !text-slate-900 !border-none",
+                                        "placeholder:!text-slate-400"
                                 )}
                                 countrySelectorStyleProps={{
                                         buttonClassName: cn(
-                                                "!h-full !px-3 !bg-slate-50 !border-r !border-slate-200 !rounded-l-lg hover:!bg-slate-100 !transition-colors !border-y-0 !border-l-0"
+                                                "!h-full !pl-3 !pr-2 !bg-transparent !border-r !border-slate-200 !rounded-l-lg hover:!bg-slate-50 !transition-colors !border-y-0 !border-l-0"
                                         ),
-                                        buttonContentWrapperClassName: "!flex !items-center !gap-2",
+                                        buttonContentWrapperClassName: "!flex !items-center !gap-2 [&_img]:!w-5 [&_img]:!h-auto [&_img]:!object-contain",
                                 }}
                                 style={{
                                         "--react-international-phone-height": "3.5rem",
